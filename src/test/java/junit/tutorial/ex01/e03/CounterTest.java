@@ -2,11 +2,14 @@ package junit.tutorial.ex01.e03;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.lang.reflect.Constructor;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.expression.spel.support.ReflectiveConstructorExecutor;
 
 
 class CounterTest {
@@ -30,7 +33,31 @@ class CounterTest {
 	@Test
 	void test01() {
 		Counter counter = new Counter();
-	    counter.increment();
-		assertEquals(1, counter, "increment(0, 1)失敗");
+	    int result = counter.increment();
+		assertEquals(1, result, "increment失敗");
+		
 	}
+	
+	@Test
+	void test02(){
+		Counter counter = new Counter();
+	    counter.increment();
+	    int result = counter.increment();
+		assertEquals(2, result, "increment失敗");
+		
+	}
+	
+	@Test
+	void test03(){
+		Counter counter = new Counter();
+		for(int i = 0; i <= 49; i++) {
+			counter.increment();
+		};
+	    
+	    int result = counter.increment();
+		assertEquals(51, result, "increment失敗");
+		
+	}
+	
+	
 }
