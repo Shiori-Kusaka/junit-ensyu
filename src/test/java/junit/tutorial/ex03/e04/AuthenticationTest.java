@@ -2,8 +2,6 @@ package junit.tutorial.ex03.e04;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,10 +21,6 @@ class AuthenticationTest {
 	private String password1 = "aaa";
 	private String password2 = "bbb";
 	private Account account = new Account(userId, password1);
-	
-	
-	
-	
 	
 	
 	@Mock
@@ -53,7 +47,7 @@ class AuthenticationTest {
 	void test01() {
 		doReturn(null).when(mockDao).findOrNull(userId);
 		Account result = authentication.authenticate(userId, password1);
-		assertEquals(null, result);
+		assertNull(result);
 	}
 	
 	@Test
@@ -63,7 +57,6 @@ class AuthenticationTest {
 			Account result = authentication.authenticate(userId, password1);
 			assertEquals(account.getName(), result.getName());
 			assertEquals(account.getPassword(), result.getPassword());
-			
 		}
 
 	
@@ -72,7 +65,7 @@ class AuthenticationTest {
 	void test03() {
 		doReturn(new Account(userId, password1)).when(mockDao).findOrNull(userId);
 			Account result = authentication.authenticate(userId, password2);
-			assertEquals(null, result);
+			assertNull(result);
 	}
 
 }

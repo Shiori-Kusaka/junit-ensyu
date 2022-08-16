@@ -11,6 +11,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -46,10 +47,14 @@ class LogAnalyzerTest {
 	}
 
 	@Test
+	@DisplayName("例外ハンドリング")
 	void test() throws Exception {
 			// TODO: handle exception
-			doThrow(new IOException()).when(mockLoader).load(file);
-			assertThrows(AnalyzeException.class, () -> logAnalyzer.analyze(file));
+			doThrow(new IOException("erro by stub")).when(mockLoader).load(file);
+			AnalyzeException e = assertThrows(AnalyzeException.class, () -> logAnalyzer.analyze(file));
+			Throwable throwable = e.getCause();
+			assertTrue(throwable instanceof IOException);
+			assertEquals("erro by stub", throwable.getMessage());
 	}
 
 }
