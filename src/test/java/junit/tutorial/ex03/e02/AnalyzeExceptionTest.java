@@ -1,4 +1,4 @@
-package junit.tutorial.ex03.e01;
+package junit.tutorial.ex03.e02;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class MonthlyCalendarTest {
+class AnalyzeExceptionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -28,9 +28,7 @@ class MonthlyCalendarTest {
 
 	@Test
 	void test() {
-		MonthlyCalendar monthlyCalendar = new MonthlyCalendar();
-		int result = monthlyCalendar.getRemainingDays();
-		assertEquals(15, result);
+		fail("Not yet implemented");
 	}
 
 }

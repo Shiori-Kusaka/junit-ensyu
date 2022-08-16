@@ -1,4 +1,4 @@
-package junit.tutorial.ex03.e01;
+package junit.tutorial.ex03.e02;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -7,8 +7,16 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.exceptions.base.MockitoException;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-class MonthlyCalendarTest {
+import junit.tutorial.ex01.e02.Calculator;
+
+
+class LogLoaderTest {
+	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -28,9 +36,8 @@ class MonthlyCalendarTest {
 
 	@Test
 	void test() {
-		MonthlyCalendar monthlyCalendar = new MonthlyCalendar();
-		int result = monthlyCalendar.getRemainingDays();
-		assertEquals(15, result);
+		
 	}
-
+	
+	
 }
