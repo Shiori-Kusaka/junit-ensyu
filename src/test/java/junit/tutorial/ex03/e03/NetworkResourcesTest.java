@@ -20,21 +20,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
 @ExtendWith(MockitoExtension.class)
 class NetworkResourcesTest {
-	@InjectMocks  
+	@InjectMocks
 	private NetworkResources networkResources;
 	private String StInput = "Hello World";
 	byte[] bytes = StInput.getBytes(StandardCharsets.UTF_8);
 	InputStream input = new ByteArrayInputStream(bytes);
-	
-	
-	
+
 	@Mock
-	//private NetworkLoader mockLoader;
+	// private NetworkLoader mockLoader;
 	private NetworkLoader mockLoader;
-	
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -54,15 +50,10 @@ class NetworkResourcesTest {
 
 	@Test
 	void test() throws IOException {
-		//NetworkResources networkResources = new NetworkResources();
 		doReturn(input).when(mockLoader).getInput();
-		//doReturn(new String(StInput)).when(mockLoader).getInput();
 		String result = networkResources.load();
 		assertEquals(StInput, result);
-		
-		
-		
-		
+
 	}
 
 }
