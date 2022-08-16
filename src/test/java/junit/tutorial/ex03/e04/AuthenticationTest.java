@@ -19,9 +19,15 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class AuthenticationTest {
 	@InjectMocks
 	private Authentication authentication;
-	private Account account;
-	private String userId;
-	private String password;
+	private String userId ="1";
+	private String password1 = "aaa";
+	private String password2 = "bbb";
+	private Account account = new Account(userId, password1);
+	
+	
+	
+	
+	
 	
 	@Mock
 	private AccountDao mockDao;
@@ -46,26 +52,27 @@ class AuthenticationTest {
 	@DisplayName("AccountDao が null を返す場合、authenticate メソッドは null を返す")
 	void test01() {
 		doReturn(null).when(mockDao).findOrNull(userId);
-		Account result = authentication.authenticate(null, null);
+		Account result = authentication.authenticate(userId, password1);
 		assertEquals(null, result);
 	}
 	
 	@Test
 	@DisplayName("AccountDao が Account オブジェクトを返し、かつパスワードが一致する場合、 authenticate メソッドは Account オブジェクトを返す")
 	void test02() {
-		doReturn(account).when(mockDao).findOrNull(userId);
-		Account result = authentication.authenticate(userId, password);
-		assertEquals(account, result);
-	}
+		doReturn(new Account(userId, password1)).when(mockDao).findOrNull(userId);
+			Account result = authentication.authenticate(userId, password1);
+			assertEquals(account.getName(), result.getName());
+			assertEquals(account.getPassword(), result.getPassword());
+			
+		}
+
 	
 	@Test
 	@DisplayName("AccountDao が Account オブジェクトを返し、かつパスワードが一致しない場合、 authenticate メソッドは null を返す")
 	void test03() {
-		doReturn(account).when(mockDao).findOrNull(userId);
-		if(userId != password) {
-			Account result = authentication.authenticate(userId, password);
+		doReturn(new Account(userId, password1)).when(mockDao).findOrNull(userId);
+			Account result = authentication.authenticate(userId, password2);
 			assertEquals(null, result);
-		};
 	}
 
 }
